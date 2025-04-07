@@ -3,7 +3,8 @@ import "package:sneakbro/models/shoe.dart";
 
 class ShoeTile extends StatelessWidget {
   final Shoe shoe;
-  const ShoeTile({super.key, required this.shoe});
+  final void Function()? onTap;
+  const ShoeTile({super.key, required this.shoe,required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -18,67 +19,54 @@ class ShoeTile extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-                ClipRRect(
+              ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(shoe.imagePath)),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    shoe.description,
-                    style: TextStyle(
-                      color:Colors.grey[900],
-                      fontSize: 18,
-                      fontStyle:  FontStyle.italic,
-
-                    ),
+                  child: Image.asset(shoe.imagePath,height: 200,width: 800,)),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  shoe.description,
+                  style: TextStyle(
+                    color: Colors.grey[900],
+                    fontSize: 18,
+                    fontStyle: FontStyle.italic,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left:18.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            shoe.name,
-                            style:TextStyle(
-                              color:Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18
-                            )
-                          ),
-                          Text(
-                            shoe.price,
-                              style:TextStyle(
-                                  color:Colors.grey,
-
-                                  fontSize: 18
-                              )
-                          )
-                        ],
-                      ),
-                      Container(
-                        height:50,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 18.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(shoe.name,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18)),
+                        Text('₹'+shoe.price,
+                            style: TextStyle(color: Colors.grey, fontSize: 18))
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap:onTap,
+                      child: Container(
+                        height: 50,
                         width: 50,
                         decoration: BoxDecoration(
-                          color:Colors.black,
+                          color: Colors.black,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Icon(
-                          Icons.add,
-                          color:Colors.white,
-                          size:40
-                        ),
-                      )
-                    ],
-                  ),
-                )
-
+                        child: Icon(Icons.add, color: Colors.white, size: 40),
+                      ),
+                    )
+                  ],
+                ),
+              )
             ],
-
           ),
         ));
   }
